@@ -3,6 +3,7 @@ from models import db, Restaurant, RestaurantPizza, Pizza
 from flask_migrate import Migrate
 from flask import Flask, request, make_response, jsonify
 from flask_restful import Api, Resource
+from flask_cors import CORS
 import os
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -12,6 +13,8 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.json.compact = False
+
+CORS(app)
 
 migrate = Migrate(app, db)
 
@@ -59,8 +62,8 @@ class RestaurantPizzas(Resource):
     def post(self):
         data = request.get_json()
         price = data.get('price')
-        pizza_id = data.get('pizza_id')
-        restaurant_id = data.get('restaurant_id')
+        pizza_id = int(data.get('pizza_id'))
+        restaurant_id = int(data.get('restaurant_id'))
 
         pizza = Pizza.query.get(pizza_id)
         restaurant = Restaurant.query.get(restaurant_id)
@@ -83,17 +86,17 @@ class RestaurantPizzas(Resource):
         response_data = {
             "id": new_rp.id,
             "price": new_rp.price,
-            "pizza_id": pizza.id,
-            "restaurant_id": restaurant.id,
+            "pizza_id": new_rp.pizza_id,
+            "restaurant_id": new_rp.restaurant.id,
             "pizza": {
-                "id": pizza.id,
-                "name": pizza.name,
-                "ingredients": pizza.ingredients
+                "id": new_rp.pizza.id,
+                "name": new_rp.pizza.name,
+                "ingredients": new_rp.pizza.ingredients
             },
             "restaurant": {
-                "id": restaurant.id,
-                "name": restaurant.name,
-                "address": restaurant.address
+                "id": new_rp.restaurant.id,
+                "name": new_rp.restaurant.name,
+                "address": new_rp.restaurant.address
             }
         }
 

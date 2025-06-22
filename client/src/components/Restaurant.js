@@ -44,19 +44,19 @@ function Home() {
   return (
     <section className="container">
       <div className="card">
-        <h1>{restaurant.name}</h1>
-        <p>{restaurant.address}</p>
+        <h1>{restaurant?.name}</h1>
+        <p>{restaurant?.address}</p>
       </div>
       <div className="card">
         <h2>Pizza Menu</h2>
         {restaurant.restaurant_pizzas.map((restaurant_pizza) => (
-          <div key={restaurant_pizza.pizza.id}>
-            <h3>{restaurant_pizza.pizza.name}</h3>
+          <div key={restaurant_pizza?.pizza?.id}>
+            <h3>{restaurant_pizza?.pizza?.name}</h3>
             <p>
-              <em>{restaurant_pizza.pizza.ingredients}</em>
+              <em>{restaurant_pizza?.pizza?.ingredients}</em>
             </p>
             <p>
-              <em>Price ${restaurant_pizza.price}</em>
+              <em>Price ${restaurant_pizza?.price}</em>
             </p>
           </div>
         ))}
