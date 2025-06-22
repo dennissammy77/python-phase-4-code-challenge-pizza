@@ -1,4 +1,12 @@
-# Phase 4 Code Challenge: Pizza Restaurants (Updated)
+# Phase 4 Code Challenge: Pizza Restaurants (Updated)sqlalchemy-serializer = "*"
+flask-restful = "*"
+importlib-resources = "5.10.0"
+Flask-Migrate = "3.1.0"
+Flask-SQLAlchemy = "2.5.1"
+Flask = "2.2.2"
+ipdb = "0.13.9"
+pytest = "7.1.3"
+Faker = "14.2.0"
 
 In this code challenge, you'll be working with a Pizza Restaurant domain.
 
